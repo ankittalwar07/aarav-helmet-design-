@@ -33,8 +33,8 @@ export const shells = [
 export const gels = [
   { id: "none",    emoji: "🚫", name: "No smart layer",     density: 0,    permeability: 99, crush: 0,    cost: 0,    note: "Airy and light... but you removed the part that protects you!" },
   { id: "oobleck", emoji: "🥣", name: "Oobleck (DIY)",      density: 1.00, permeability: 0.5, crush: 0.45, cost: 0.01, note: "Great for the experiment, but it dries out — not a real helmet." },
-  { id: "d3o",     emoji: "🟧", name: "D3O smart foam",     density: 0.40, permeability: 2, crush: 0.75, cost: 0.06, note: "Soft when worn, locks hard on impact. The real deal." },
-  { id: "stf",     emoji: "🍯", name: "STF liquid armor",   density: 0.60, permeability: 3, crush: 0.65, cost: 0.10, note: "Light and breathable liquid armor, but pricey to make." },
+  { id: "d3o",     emoji: "🟧", name: "D3O smart foam",     density: 0.40, permeability: 3.5, crush: 0.80, cost: 0.05, note: "Soft when worn, locks hard on impact. The real deal." },
+  { id: "stf",     emoji: "🍯", name: "STF liquid armor",   density: 0.55, permeability: 5, crush: 0.70, cost: 0.07, note: "Light and breathable liquid armor, but pricey to make." },
 ];
 
 export const liners = [
