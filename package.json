@@ -1,0 +1,12 @@
+{
+  "name": "aarav-smart-helmet-lab",
+  "version": "1.0.0",
+  "description": "An interactive 3D + physics lab for Aarav's smart helmet idea: soft & airy on your head, rock-hard when you crash.",
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve -l 5173 .",
+    "dev": "npx --yes serve -l 5173 ."
+  },
+  "keywords": ["helmet", "non-newtonian", "shear-thickening", "three.js", "science", "education"],
+  "license": "MIT"
+}

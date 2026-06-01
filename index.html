@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aarav's Smart Helmet Lab 🪖⚡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Three.js loaded as an ES module from a CDN. No build step needed. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🪖⚡</span>
+      <div>
+        <h1>Aarav's Smart Helmet Lab</h1>
+        <p class="tagline">Soft &amp; airy on your head — rock hard when you crash.</p>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="design">🧊 3D Helmet</button>
+      <button class="tab" data-tab="material">🔬 Smart Material</button>
+      <button class="tab" data-tab="physics">📐 The Physics</button>
+      <button class="tab" data-tab="materials">🧪 Materials Guide</button>
+      <button class="tab" data-tab="experiment">🥣 Build It Yourself</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== 3D HELMET ===================== -->
+    <section class="panel active" id="design">
+      <div class="viewer-wrap">
+        <div id="helmet-canvas"></div>
+        <div class="viewer-overlay">
+          <span class="hint">🖱️ Drag to rotate · scroll to zoom</span>
+        </div>
+      </div>
+      <aside class="controls">
+        <h2>Design Controls</h2>
+        <p class="muted">This is Aarav's helmet. The clever part is the <b>smart-gel layer</b> hidden inside the airy shell.</p>
+
+        <label class="ctl">
+          <span>Show smart-gel layer</span>
+          <input type="checkbox" id="toggle-gel" checked />
+        </label>
+        <label class="ctl">
+          <span>Show ventilation channels</span>
+          <input type="checkbox" id="toggle-vents" checked />
+        </label>
+        <label class="ctl">
+          <span>Cut-away (cross-section)</span>
+          <input type="checkbox" id="toggle-section" />
+        </label>
+        <label class="ctl">
+          <span>Spin the model</span>
+          <input type="checkbox" id="toggle-spin" checked />
+        </label>
+
+        <hr />
+        <h3>💥 Crash Test</h3>
+        <p class="muted">Press the button to drop an impact on the helmet and watch the smart gel <b>flash hard</b> exactly where it's hit.</p>
+        <button class="big-btn" id="impact-btn">Drop an impact!</button>
+        <div class="readout" id="impact-readout">Ready.</div>
+
+        <hr />
+        <div class="layer-legend">
+          <div><span class="swatch shell"></span> Airy outer shell (breathable mesh)</div>
+          <div><span class="swatch gel"></span> Smart-gel layer (soft → hard)</div>
+          <div><span class="swatch comfort"></span> Comfort liner (touches hair)</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ===================== SMART MATERIAL SIM ===================== -->
+    <section class="panel" id="material">
+      <div class="sim-wrap">
+        <canvas id="molecule-canvas" width="720" height="480"></canvas>
+        <div class="sim-state" id="sim-state">State: <b>SOFT</b> (liquid-like)</div>
+      </div>
+      <aside class="controls">
+        <h2>Why does it harden?</h2>
+        <p>The secret is a <b>shear-thickening fluid</b> (a "non-Newtonian" material). It's full of tiny solid particles floating in liquid.</p>
+        <ul class="facts">
+          <li>🐢 <b>Slow push</b> → particles slide past each other → feels like a <b>gel</b>.</li>
+          <li>⚡ <b>Fast hit</b> → particles jam together into "log-jams" called <b>hydroclusters</b> → feels like a <b>solid</b>.</li>
+          <li>🔁 It's <b>reversible</b> — once the hit is over, it goes soft again.</li>
+        </ul>
+
+        <label class="slider">
+          <span>How fast are you pushing it?</span>
+          <input type="range" id="speed-slider" min="0" max="100" value="10" />
+          <div class="slider-labels"><span>🐢 slow</span><span>⚡ fast</span></div>
+        </label>
+
+        <div class="meter">
+          <div class="meter-label">Stiffness</div>
+          <div class="meter-bar"><div class="meter-fill" id="stiffness-fill"></div></div>
+        </div>
+
+        <button class="big-btn" id="poke-btn">⚡ Punch it!</button>
+        <p class="muted">Tip: drag slowly across the box and it stays soft. Click "Punch it!" for a fast hit and watch the particles lock up.</p>
+      </aside>
+    </section>
+
+    <!-- ===================== PHYSICS ===================== -->
+    <section class="panel" id="physics">
+      <div class="physics-wrap">
+        <h2>📐 The physics of not getting hurt</h2>
+        <p>A helmet's whole job is to make a crash <b>last longer</b>. The same energy spread over more time = a much smaller force on your head.</p>
+
+        <div class="formula-card">
+          <div class="formula">F = Δp / Δt</div>
+          <p>Force = change in momentum ÷ time. If the material <b>stretches out the stop</b> (bigger Δt), the force F on the skull drops. That's the magic.</p>
+        </div>
+
+        <h3>Try the impact calculator</h3>
+        <div class="calc">
+          <label>Rider + head mass at the impact point (kg)
+            <input type="number" id="calc-mass" value="5" min="0.5" step="0.5" />
+          </label>
+          <label>Speed at impact (km/h)
+            <input type="number" id="calc-speed" value="20" min="1" step="1" />
+          </label>
+          <label>Stopping distance — how much the material squishes (cm)
+            <input type="range" id="calc-dist" min="0.2" max="6" step="0.1" value="0.5" />
+            <output id="calc-dist-out">0.5 cm</output>
+          </label>
+
+          <div class="calc-results">
+            <div class="result-card hard">
+              <div class="result-title">No helmet (skull stops in ~2 mm)</div>
+              <div class="result-num" id="res-nohelmet">–</div>
+              <div class="result-sub">peak force</div>
+            </div>
+            <div class="result-card soft">
+              <div class="result-title">Aarav's smart helmet</div>
+              <div class="result-num" id="res-helmet">–</div>
+              <div class="result-sub">peak force</div>
+            </div>
+          </div>
+          <div class="verdict" id="calc-verdict"></div>
+        </div>
+
+        <div class="formula-card">
+          <h3>The energy that has to go somewhere</h3>
+          <div class="formula small">KE = ½ · m · v²</div>
+          <p id="ke-line">Kinetic energy at impact: <b>–</b>. The smart gel turns this into heat and tiny particle friction instead of into your skull.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MATERIALS GUIDE ===================== -->
+    <section class="panel" id="materials">
+      <div class="guide-wrap">
+        <h2>🧪 What could Aarav actually make it from?</h2>
+        <p class="muted">Each material is a real option. Cards show how soft/airy it is vs. how protective, plus how easy it is for a kid to experiment with.</p>
+        <div class="card-grid" id="materials-grid"><!-- filled by JS --></div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPERIMENT ===================== -->
+    <section class="panel" id="experiment">
+      <div class="exp-wrap">
+        <h2>🥣 Prove it at home: make Oobleck</h2>
+        <p>Before building a whole helmet, Aarav can prove the science in 5 minutes in the kitchen. Oobleck is a shear-thickening fluid — exactly the effect his helmet needs.</p>
+
+        <div class="exp-grid">
+          <div class="exp-card">
+            <h3>You need</h3>
+            <ul>
+              <li>1 cup cornstarch (corn flour)</li>
+              <li>About ½ cup water</li>
+              <li>A bowl + a spoon</li>
+              <li>Food colouring (optional, fun)</li>
+            </ul>
+          </div>
+          <div class="exp-card">
+            <h3>Steps</h3>
+            <ol>
+              <li>Add cornstarch to the bowl.</li>
+              <li>Slowly stir in water until it's like thick honey.</li>
+              <li>Push <b>slowly</b> → your finger sinks in (soft!).</li>
+              <li>Punch it <b>fast</b> → it feels hard, splash-free (hard!).</li>
+              <li>Roll a ball in your hands, then stop — it melts. 🤯</li>
+            </ol>
+          </div>
+          <div class="exp-card">
+            <h3>Science-fair questions</h3>
+            <ul>
+              <li>Does <b>more cornstarch</b> make it harden more easily?</li>
+              <li>Drop a small weight from different heights — does it bounce or sink?</li>
+              <li>Put oobleck in a balloon — does it protect an egg from a drop? 🥚</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>From kitchen to helmet:</b> Real armor brands (like D3O) use the same idea but with engineered polymers sealed in a soft pad, so it never dries out and stays comfy. Aarav's design = airy shell + a sealed shear-thickening pad + a soft liner that lets his hair breathe.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Made for Aarav's science experiment · soft when you wear it, hard when you need it.
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
