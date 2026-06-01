@@ -60,6 +60,7 @@ your head.
 
 | Tab | What it does |
 |-----|--------------|
+| 🎯 **Design Challenge** | The heart of the app. Aarav **breaks the problem into 3 layers**, designs his *own* helmet under real **constraints** (weight, airflow, budget), watches every choice change the results live, then **crash-tests** it at a chosen speed to see if the brain survives — and iterates until the mission is solved. |
 | 🧊 **3D Helmet** | Rotate Aarav's helmet, toggle the airy shell / smart-gel layer / comfort liner, see a cut-away, and run a **crash test** that flashes the gel hard at the hit point. |
 | 🔬 **Smart Material** | A live particle simulation. Drag slowly = stays soft; click **Punch it!** = particles jam and it goes hard. |
 | 📐 **The Physics** | The real equations + an **impact calculator** comparing "no helmet" vs. Aarav's helmet (peak force and g-forces). |
@@ -67,6 +68,28 @@ your head.
 | 🥣 **Build It Yourself** | A 5-minute **oobleck experiment** to prove the science by hand, with science-fair questions to investigate. |
 
 ---
+
+## 🧠 For the grown-up: how this teaches problem-solving
+
+The **Design Challenge** tab is built to teach *how to think*, not just *what to build*:
+
+1. **Break the big problem into small ones.** The impossible-sounding goal ("airy
+   AND protective") becomes three solvable sub-problems: shell, smart layer, liner.
+2. **Constraints are the point, not the enemy.** Aarav can't just "make it safe" —
+   he must stay under a weight, keep airflow up, and stay on budget. Real engineers
+   *always* design inside limits.
+3. **Every choice has a trade-off.** Thicker smart layer = safer but heavier, less
+   airy, and pricier. The live gauges make the trade-off visible and immediate.
+4. **Test, fail, learn, iterate.** The crash simulator gives instant, honest
+   feedback. A design that survives a tip-over may fail a downhill crash — so he
+   learns to change *one variable at a time* and re-test.
+5. **There isn't always a perfect answer.** At extreme speeds he'll discover you
+   can't max out *everything* at once — the deepest engineering lesson of all.
+
+Good questions to ask him while he plays:
+- "Why did that change make it heavier?"
+- "What's the *one* thing you'd change to pass the next crash?"
+- "Can you pass the downhill test? What did you have to give up to do it?"
 
 ## 🛠️ The 3-layer design
 
@@ -93,12 +116,14 @@ your head.
 ## 📁 Project structure
 
 ```
-index.html        # The whole UI / layout
-styles.css        # Styling
-src/main.js       # Wires everything together (tabs, calculator, etc.)
-src/helmet.js     # The 3D helmet model (Three.js)
-src/simulator.js  # The shear-thickening particle simulation (2D canvas)
-data/materials.js # The materials shown in the guide
+index.html         # The whole UI / layout
+styles.css         # Styling
+src/main.js        # Wires everything together (tabs, calculator, etc.)
+src/challenge.js   # The Design Challenge: constraints, live model + crash sim
+src/helmet.js      # The 3D helmet model (Three.js)
+src/simulator.js   # The shear-thickening particle simulation (2D canvas)
+data/components.js # The "parts box": materials + properties + crash limits
+data/materials.js  # The materials shown in the guide
 ```
 
 Made for Aarav — keep experimenting! 🧪

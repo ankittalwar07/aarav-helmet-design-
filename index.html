@@ -28,7 +28,8 @@
       </div>
     </div>
     <nav class="tabs" id="tabs">
-      <button class="tab active" data-tab="design">🧊 3D Helmet</button>
+      <button class="tab active" data-tab="challenge">🎯 Design Challenge</button>
+      <button class="tab" data-tab="design">🧊 3D Helmet</button>
       <button class="tab" data-tab="material">🔬 Smart Material</button>
       <button class="tab" data-tab="physics">📐 The Physics</button>
       <button class="tab" data-tab="materials">🧪 Materials Guide</button>
@@ -37,8 +38,13 @@
   </header>
 
   <main>
+    <!-- ===================== DESIGN CHALLENGE ===================== -->
+    <section class="panel active" id="challenge">
+      <div id="challenge-root"></div>
+    </section>
+
     <!-- ===================== 3D HELMET ===================== -->
-    <section class="panel active" id="design">
+    <section class="panel" id="design">
       <div class="viewer-wrap">
         <div id="helmet-canvas"></div>
         <div class="viewer-overlay">

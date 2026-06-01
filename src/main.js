@@ -1,5 +1,6 @@
 import { initHelmet } from "./helmet.js";
 import { initSimulator } from "./simulator.js";
+import { initChallenge } from "./challenge.js";
 import { materials } from "../data/materials.js";
 
 /* ---------------- Tabs ---------------- */
@@ -18,6 +19,9 @@ tabs.forEach((tab) => {
     window.dispatchEvent(new Event("resize"));
   });
 });
+
+/* ---------------- Design Challenge (the main learning lab) ---------------- */
+initChallenge(document.getElementById("challenge-root"));
 
 /* ---------------- 3D Helmet ---------------- */
 const helmet = initHelmet(document.getElementById("helmet-canvas"));
